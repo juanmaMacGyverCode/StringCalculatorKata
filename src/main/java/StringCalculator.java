@@ -21,7 +21,10 @@ public class StringCalculator {
             int finalForWithDelimitador = divideHeadAndBody[1].length() - delimitador.length() + 1;
             for (int i = 0; i < finalForWithDelimitador; i++) {
                 boolean notFloat = isFloat(divideHeadAndBody[1], i, finalForWithDelimitador);
-                if (notFloat && !(divideHeadAndBody[1].charAt(i) + "").matches("\\d+") && (!(divideHeadAndBody[1].substring(i, delimitador.length() + i)).equals(delimitador) && !(divideHeadAndBody[1].charAt(i + delimitador.length() - 1) + "").matches("\\d+"))) {
+                boolean findNotDelimitadorAndNotNumber = !(divideHeadAndBody[1].charAt(i) + "").matches("\\d+") &&
+                        (!(divideHeadAndBody[1].substring(i, delimitador.length() + i)).equals(delimitador) &&
+                                !(divideHeadAndBody[1].charAt(i + delimitador.length() - 1) + "").matches("\\d+"));
+                if (notFloat && findNotDelimitadorAndNotNumber) {
                     listErrors.add("'" + delimitador + "' expected but '" + divideHeadAndBody[1].substring(i, delimitador.length() + i) + "' found at position " + i + ".");
                 }
             }
